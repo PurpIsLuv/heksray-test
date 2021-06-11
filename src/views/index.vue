@@ -66,16 +66,32 @@ export default {
       tagList: 'getTagList'
     }),
     filtredArticleList() {
+      let list = []
       if (this.search) {
-        return this.articleList.filter((article) => {
+        list = this.articleList.filter((article) => {
           const search = this.search.toLowerCase()
           const text = article.text.toLowerCase()
           const title = article.title.toLowerCase()
           return text.includes(search) || title.includes(search)
         })
       } else {
-        return this.articleList
+        list = this.articleList
       }
+      if (!this.selectedTags.includes(0)) {
+        list = list.filter((article) => {
+          let flag = false
+          this.selectedTags.forEach((tagIndex) => {
+            const tag = this.tagList[tagIndex - 1]
+            if (article.tags.includes(tag)) {
+              flag = true
+            }
+          })
+
+          return flag
+        })
+      }
+
+      return list
     }
   },
   methods: {

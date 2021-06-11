@@ -11,7 +11,13 @@
           auto-grow
           rows="1"
         />
-        <v-combobox label="Тэги" v-model="currentTags" multiple chips />
+        <v-combobox
+          label="Тэги"
+          v-model="currentTags"
+          multiple
+          chips
+          :items="tagList"
+        />
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -25,7 +31,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -63,6 +69,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      tagList: 'getTagList'
+    }),
     isEdit() {
       return !!this.data?.id
     }
