@@ -9,7 +9,7 @@
     <v-card-text class="article__text">{{ text }}</v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="success">В топ</v-btn>
+      <v-btn color="success" @click="swapArticle(id)">В топ</v-btn>
       <v-btn color="primary" @click="$emit('change', id)">Изменить</v-btn>
       <v-btn color="error" @click="deleteArticle(id)">Удалить</v-btn>
     </v-card-actions>
@@ -44,7 +44,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      deleteArticle: 'DELETE_ARTICLE'
+      deleteArticle: 'DELETE_ARTICLE',
+      swapArticle: 'SWAP_ARTICLE'
     })
   }
 }

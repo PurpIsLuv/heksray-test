@@ -12,5 +12,11 @@ export default {
     article.title = data.title
     article.text = data.text
     article.tags = data.tags
+  },
+  SWAP_ARTICLE(state, id) {
+    const article = state.list.find((article) => article.id === id)
+    const index = state.list.findIndex((article) => article.id === id)
+    state.list.splice(index, 1)
+    state.list.unshift(article)
   }
 }
